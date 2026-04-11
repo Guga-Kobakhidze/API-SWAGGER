@@ -69,7 +69,8 @@ export class TokensLibService {
   public generateRefreshToken(payload: jwtPayload): string {
     const options: JwtSignOptions = {
       secret: this.authConfig.getRefreshSecret(),
-      expiresIn: this.authConfig.getRefreshExpiration(),
+      expiresIn:
+        this.authConfig.getRefreshExpiration() as JwtSignOptions['expiresIn'],
     };
 
     return this.jwtService.sign({ ...payload, type: 'refresh' }, options);

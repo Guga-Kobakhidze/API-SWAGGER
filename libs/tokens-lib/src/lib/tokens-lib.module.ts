@@ -4,7 +4,7 @@ import { TokensLibService } from './tokens-lib.service';
 import { DataSource } from '@app/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TokenEntity } from './entities';
-import { JwtModule } from '@nestjs/jwt';
+import { JwtModule, JwtSignOptions } from '@nestjs/jwt';
 import { ConfigModule } from '@app/config';
 import * as Joi from 'joi';
 import { AuthConfig } from '@app/config/lib/settings/auth.config';
@@ -27,7 +27,8 @@ import { AuthConfig } from '@app/config/lib/settings/auth.config';
           global: true,
           secret: authConfig.getAccessSecret(),
           signOptions: {
-            expiresIn: authConfig.getAccessExpiration(),
+            expiresIn:
+              authConfig.getAccessExpiration() as JwtSignOptions['expiresIn'],
           },
         };
       },
