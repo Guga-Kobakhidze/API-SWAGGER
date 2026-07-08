@@ -15,7 +15,7 @@ import {
 } from '@nestjs/common';
 import { CreateResourceInput } from './dto/create-resource.input';
 import { UpdateResourceInput } from './dto/update-resource.input';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiQuery } from '@nestjs/swagger';
 import { ResourceFilterDto } from './dto/resource-filter.dto';
 
 @UseGuards(JwtAuthGuard)
@@ -45,6 +45,7 @@ export class ResourceController {
   }
 
   @Get(':resource')
+  @ApiQuery({ name: 'sort', required: false, enum: ['ASC', 'DESC'] })
   async find(
     @Param('resource') resource: string,
     @Query() filters: ResourceFilterDto,
