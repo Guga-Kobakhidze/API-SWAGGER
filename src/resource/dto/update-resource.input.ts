@@ -2,7 +2,11 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsObject } from 'class-validator';
 
 export class UpdateResourceInput {
-  @ApiProperty()
+  @ApiProperty({
+    type: 'object',
+    additionalProperties: true,
+    example: {},
+  })
   @IsObject()
-  data: Record<string, any>[];
+  data!: Record<string, any>;
 }

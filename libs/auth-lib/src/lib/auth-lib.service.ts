@@ -29,9 +29,9 @@ export class AuthLibService {
   }
 
   public async login(input: LoginDto): Promise<AuthResponseModel> {
-    const { email, password } = input;
+    const { email, password, role } = input;
     const user = await this.validateUser(email, password);
-    if (!user) {
+    if (!user || (role && user.role !== role)) {
       throw new UnauthorizedException();
     }
 
@@ -95,6 +95,7 @@ export class AuthLibService {
     const hash = await this.passwordService.hash(input.password);
     const createdUser = await this.usersService.create({
       ...input,
+      role: input.role ?? 'user',
       password: hash,
     });
     return this.performLogin(createdUser);

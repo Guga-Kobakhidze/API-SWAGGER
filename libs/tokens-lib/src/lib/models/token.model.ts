@@ -5,26 +5,26 @@ import { UserModel } from '@app/users-lib';
 
 export class TokenModel implements IToken {
   @Exclude({ toPlainOnly: true })
-  public id: number;
+  public id!: number;
 
   @ApiProperty()
-  public accessToken: string;
+  public accessToken!: string;
 
   @ApiProperty()
-  public refreshToken: string;
+  public refreshToken!: string;
 
   @ApiProperty()
-  public userId: number;
+  public userId!: number;
 
   @Exclude({ toPlainOnly: true })
   public user?: UserModel;
 
   @ApiProperty()
-  public expiredAt: Date;
+  public expiredAt!: Date;
 
   @Exclude({ toPlainOnly: true })
-  public createdAt: Date;
+  public createdAt!: Date;
 
   @Exclude({ toPlainOnly: true })
-  public updatedAt: Date;
+  public updatedAt!: Date;
 }

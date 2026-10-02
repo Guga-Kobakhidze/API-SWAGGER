@@ -5,5 +5,5 @@ export class CreateResourceInput {
   @ApiProperty()
   @IsArray()
   @ArrayNotEmpty()
-  data: Record<string, any>[];
+  data!: Record<string, any>[];
 }

@@ -12,5 +12,5 @@ export class UserEmailDto {
     example: 'example@gmail.com',
   })
   @IsEmail()
-  email: string;
+  email!: string;
 }

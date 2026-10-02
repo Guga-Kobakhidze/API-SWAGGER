@@ -10,17 +10,17 @@ import { IResource } from '../interfaces';
 @Entity('resources')
 export class ResourceEntity implements IResource {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id!: string;
 
   @Column()
-  resource: string;
+  resource!: string;
 
   @Column({ type: 'jsonb' })
-  data: Record<string, any>;
+  data!: Record<string, any>;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt!: Date;
 }

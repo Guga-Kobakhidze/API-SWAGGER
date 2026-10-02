@@ -10,23 +10,26 @@ import { IUser } from '../interfaces';
 @Entity({ name: 'users', schema: 'public' })
 export class UserEntity implements IUser {
   @PrimaryGeneratedColumn()
-  public id: number;
+  public id!: number;
 
   @Column({ type: 'varchar', nullable: false })
-  public email: string;
+  public email!: string;
 
   @Column({ type: 'varchar', nullable: false })
-  public password: string;
+  public password!: string;
 
   @Column({ type: 'varchar', nullable: false })
-  public firstName: string;
+  public firstName!: string;
 
   @Column({ type: 'varchar', nullable: false })
-  public lastName: string;
+  public lastName!: string;
+
+  @Column({ type: 'varchar', nullable: false })
+  public role!: string;
 
   @CreateDateColumn()
-  public createdAt: Date;
+  public createdAt!: Date;
 
   @UpdateDateColumn()
-  public updatedAt: Date;
+  public updatedAt!: Date;
 }

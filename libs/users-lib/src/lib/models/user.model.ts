@@ -4,23 +4,26 @@ import { Exclude } from 'class-transformer';
 
 export class UserModel implements IUser {
   @ApiProperty()
-  public id: number;
+  public id!: number;
 
   @ApiProperty()
-  public email: string;
+  public email!: string;
 
   @ApiProperty()
-  public firstName: string;
+  public firstName!: string;
 
   @ApiProperty()
-  public lastName: string;
+  public lastName!: string;
+
+  @ApiProperty()
+  public role!: string;
 
   @Exclude({ toPlainOnly: true })
-  public password: string;
+  public password!: string;
 
   @Exclude({ toPlainOnly: true })
-  public createdAt: Date;
+  public createdAt!: Date;
 
   @Exclude({ toPlainOnly: true })
-  public updatedAt: Date;
+  public updatedAt!: Date;
 }

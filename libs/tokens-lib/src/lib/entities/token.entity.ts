@@ -13,27 +13,27 @@ import { UserEntity } from '@app/users-lib';
 @Entity('tokens')
 export class TokenEntity implements IToken {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  accessToken: string;
+  accessToken!: string;
 
   @Column()
-  refreshToken: string;
+  refreshToken!: string;
 
   @Column()
-  userId: number;
+  userId!: number;
 
   @ManyToOne(() => UserEntity, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'userId' })
-  user: UserEntity;
+  user!: UserEntity;
 
   @Column()
-  expiredAt: Date;
+  expiredAt!: Date;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt!: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt!: Date;
 }

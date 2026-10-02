@@ -2,6 +2,7 @@ import {
   Body,
   ClassSerializerInterceptor,
   Controller,
+  Get,
   HttpStatus,
   Post,
   UseGuards,
@@ -13,7 +14,7 @@ import { LoginDto } from '@app/auth-lib/lib/dto';
 import { AuthResponseModel } from '@app/auth-lib/lib/models';
 import { RegisterDto } from '@app/auth-lib/lib/dto/register.dto';
 import { CurrentUser, JwtAuthGuard } from '@app/common';
-import { IUser } from '@app/users-lib';
+import { IUser, UserModel } from '@app/users-lib';
 import { RefreshTokenDto } from './dto';
 
 @ApiTags('auth')
@@ -38,6 +39,13 @@ export class AuthController {
     @Body() input: RegisterDto,
   ): Promise<void | AuthResponseModel> {
     return this.authService.register(input);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('me')
+  @ApiResponse({ status: HttpStatus.OK, type: UserModel })
+  public me(@CurrentUser() user: IUser): UserModel {
+    return user as UserModel;
   }
 
   @UseGuards(JwtAuthGuard)

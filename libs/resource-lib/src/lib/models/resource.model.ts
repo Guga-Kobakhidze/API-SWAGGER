@@ -5,17 +5,17 @@ import { IResource } from '../interfaces';
 @Entity('tokens')
 export class ResourceModel implements IResource {
   @ApiProperty()
-  id: string;
+  id!: string;
 
   @ApiProperty()
-  resource: string;
+  resource!: string;
 
   @ApiProperty()
-  data: Record<string, any>;
+  data!: Record<string, any>;
 
   @ApiProperty()
-  createdAt: Date;
+  createdAt!: Date;
 
   @ApiProperty()
-  updatedAt: Date;
+  updatedAt!: Date;
 }
