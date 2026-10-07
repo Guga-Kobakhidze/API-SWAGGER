@@ -1,5 +1,11 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsEmail, IsOptional, IsString, Length } from 'class-validator';
+import {
+  IsEmail,
+  IsObject,
+  IsOptional,
+  IsString,
+  Length,
+} from 'class-validator';
 
 export class RegisterDto {
   @ApiProperty()
@@ -26,4 +32,16 @@ export class RegisterDto {
   @IsOptional()
   @IsString()
   role?: string;
+
+  @ApiPropertyOptional({
+    type: 'object',
+    additionalProperties: true,
+    example: {
+      image: 'https://example.com/avatar.png',
+      street: 'Main Street 1',
+    },
+  })
+  @IsOptional()
+  @IsObject()
+  data?: Record<string, any>;
 }

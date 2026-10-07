@@ -1,5 +1,5 @@
 import { IUser } from '../interfaces';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
 
 export class UserModel implements IUser {
@@ -17,6 +17,12 @@ export class UserModel implements IUser {
 
   @ApiProperty()
   public role!: string;
+
+  @ApiPropertyOptional({
+    type: 'object',
+    additionalProperties: true,
+  })
+  public data?: Record<string, any>;
 
   @Exclude({ toPlainOnly: true })
   public password!: string;

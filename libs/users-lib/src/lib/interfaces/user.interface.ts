@@ -5,6 +5,7 @@ export interface IUser {
   firstName: string;
   lastName: string;
   role: string;
+  data?: Record<string, any>;
   createdAt: Date;
   updatedAt: Date;
 }

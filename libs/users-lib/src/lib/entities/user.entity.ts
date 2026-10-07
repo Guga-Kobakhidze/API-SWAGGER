@@ -27,6 +27,9 @@ export class UserEntity implements IUser {
   @Column({ type: 'varchar', nullable: false })
   public role!: string;
 
+  @Column({ type: 'jsonb', nullable: true, default: {} })
+  public data?: Record<string, any>;
+
   @CreateDateColumn()
   public createdAt!: Date;
 

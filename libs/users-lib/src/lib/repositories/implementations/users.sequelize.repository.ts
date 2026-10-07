@@ -51,7 +51,7 @@ export class UsersSequelizeRepository implements UsersRepository {
 
   public async findOne(filters: Partial<UserModel>): Promise<UserModel> {
     const user = await this.usersRepository.findOne({
-      where: filters,
+      where: filters as FindOptionsWhere<UserEntity>,
     });
     return this.toModel(user!);
   }

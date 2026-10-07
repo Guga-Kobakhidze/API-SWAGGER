@@ -94,6 +94,7 @@ export class AuthLibService {
     const createdUser = await this.usersService.create({
       ...input,
       role: input.role ?? 'user',
+      data: input.data ?? {},
       password: hash,
     });
     return this.performLogin(createdUser);
