@@ -49,8 +49,10 @@ export class TokensLibService {
 
     const dbToken = await this.findByUserId(user.id);
     if (dbToken) {
+      dbToken.accessToken = accessToken;
       dbToken.refreshToken = refreshToken;
-      await this.update(user.id, dbToken);
+      dbToken.expiredAt = expiredAt;
+      await this.update(dbToken.id, dbToken);
       return dbToken;
     }
 

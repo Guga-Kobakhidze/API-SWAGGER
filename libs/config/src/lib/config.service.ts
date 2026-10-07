@@ -18,7 +18,8 @@ export class ConfigService implements AuthConfig, DBConfig {
 
   getAccessExpiration(): string {
     return (
-      this.configService.get<string>('JWT_ACCESS_TOKEN_EXPIRATION_TIME') || '1h'
+      this.configService.get<string>('JWT_ACCESS_TOKEN_EXPIRATION_TIME') ||
+      '30s'
     );
   }
 
