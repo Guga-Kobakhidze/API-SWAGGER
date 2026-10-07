@@ -4,7 +4,8 @@ import { UserEntity } from '../../entities';
 import { UsersRepository } from '../users.repository.interface';
 import { PaginationProps, QueryResult } from '@app/common';
 import { UserModel } from '../../models';
-import { FindOptionsWhere, In, Repository } from 'typeorm';
+import { UserFilterDto } from '../../dto';
+import { FindOptionsWhere, ILike, In, Repository } from 'typeorm';
 
 export const userTypeormToModel = (entity: UserEntity): UserModel => {
   const { id, firstName, lastName, email } = entity;
@@ -27,9 +28,18 @@ export class UsersSequelizeRepository implements UsersRepository {
 
   public async findAll(
     { offset, limit }: PaginationProps,
-    filters?: Partial<UserModel>,
+    filters: UserFilterDto = {},
   ): Promise<UserModel[]> {
-    const where = filters as FindOptionsWhere<UserEntity>;
+    const { role, search } = filters;
+    const where: FindOptionsWhere<UserEntity>[] | FindOptionsWhere<UserEntity> =
+      search
+        ? [
+            { ...(role && { role }), firstName: ILike(`%${search}%`) },
+            { ...(role && { role }), lastName: ILike(`%${search}%`) },
+            { ...(role && { role }), email: ILike(`%${search}%`) },
+          ]
+        : { ...(role && { role }) };
+
     const users = await this.usersRepository.find({
       where,
       skip: offset,

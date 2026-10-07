@@ -2,6 +2,7 @@ import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { UserModel } from './models';
 import { USERS_REPOSITORY_TOKEN, UsersRepository } from './repositories';
 import { PaginatedService } from '@app/common';
+import { UserFilterDto } from './dto';
 
 @Injectable()
 export class UsersLibService extends PaginatedService<UserModel> {
@@ -14,6 +15,10 @@ export class UsersLibService extends PaginatedService<UserModel> {
 
   public create(user: Partial<UserModel>): Promise<UserModel> {
     return this.userRepository.create(user);
+  }
+
+  public findAll(filters: UserFilterDto = {}): Promise<UserModel[]> {
+    return this.userRepository.findAll({ offset: 0, limit: 1000 }, filters);
   }
 
   public async findById(id: number): Promise<UserModel | never> {

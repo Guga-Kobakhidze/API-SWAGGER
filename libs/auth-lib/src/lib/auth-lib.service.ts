@@ -65,14 +65,12 @@ export class AuthLibService {
       throw new UnauthorizedException();
     }
 
-    const user = await this.usersService.findOne(payload.sub);
+    const user = await this.usersService.findById(payload.sub);
     if (!user) {
       throw new UnauthorizedException();
     }
 
     const tokens = await this.tokensService.generateTokens(user);
-
-    await this.tokensService.create({ ...tokens, userId: user.id });
     return { credentials: tokens, user };
   }
 
